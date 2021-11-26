@@ -1,0 +1,31 @@
+.details {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.details form {
+    margin-top: 50px;
+}
+
+.details label {
+    text-align: center;
+    display: block;
+}
+
+.details h1 {
+    font-size: 20px;
+    color: #f1356d;
+    margin-top: 100px;
+    margin-bottom: 30px;
+}
+
+.details input, .details select {
+
+    width: 100%;
+    padding: 6px 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    display: block;
+}
