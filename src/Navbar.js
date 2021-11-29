@@ -16,11 +16,11 @@ export default function Navbar() {
         <Link className='link' to='/'>
             <li className="topListItem">HOME</li>
         </Link>
-        <Link className='link' to='/details'>
+        {/* <Link className='link' to='/details'>
             <li className="topListItem">ORDER</li>
-        </Link>
+        </Link> */}
         <Link className='link' to='/maps'>
-            <li className="topListItem">MAPS</li>
+            <li className="topListItem">ORDER</li>
         </Link>
         {/* <Link className='link' to='/maps2'>
             <li className="topListItem">MAPS2</li>
