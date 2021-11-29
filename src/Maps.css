@@ -31,4 +31,6 @@
     display: flex;
   }
 
-  
+  .locate{
+    right: 50%;
+  }
