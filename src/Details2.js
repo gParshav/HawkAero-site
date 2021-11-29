@@ -13,8 +13,14 @@ function Details2({work}) {
 
 
     const [type, setType] = useState('');
+    const [prev, setPrev] = useState('');
     const handleClick = (e, value) => {
         setType(value);
+        if(prev){
+            document.getElementById(prev).classList.remove("service_selected");
+            setPrev('');
+        }
+        setPrev(e.target.id);
         document.getElementById(e.target.id).classList.add("service_selected");
     }
     return (

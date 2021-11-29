@@ -11,8 +11,16 @@ function Weights({work}) {
 
     const [duration, setDuration] = useState('');
     const [weight, setWeight] = useState('');
+    const [prev, setPrev] = useState('');
+
+    
     const handleClick = (e, value) => {
         setWeight(value);
+        if(prev){
+            document.getElementById(prev).classList.remove("service_selected");
+            setPrev('');
+        }
+        setPrev(e.target.id);
         document.getElementById(e.target.id).classList.add("service_selected");
     }
 
