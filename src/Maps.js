@@ -20,8 +20,8 @@ require('dotenv').config();
 
 const libraries = ["places"];
 const mapContainerStyle = {
-    height: "70vh",
-    width: "100vw",
+    height: "80vh",
+    width: "50vw",
 };
 
 const options = {
@@ -88,6 +88,7 @@ function Maps() {
         <div className='maps'>
             <Locate panTo={panTo} />
             <Search panTo={panTo} />
+            
             <GoogleMap
                 id="map"
                 mapContainerStyle={mapContainerStyle}

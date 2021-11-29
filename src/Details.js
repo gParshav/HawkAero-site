@@ -8,7 +8,7 @@ function Details({lat, long}) {
 
     const [work, setWork] = useState('');
     const [category, setCategory] = useState('');
-    const [prev, setPrev] = useState('');
+    
 
 
     const handleSubmit = (e) => {
@@ -18,6 +18,7 @@ function Details({lat, long}) {
 
     }
 
+    const [prev, setPrev] = useState('');
     const handleClick = (e, value) => {
         setWork(value);
         if(prev){
@@ -32,9 +33,17 @@ function Details({lat, long}) {
         <div className='details'>
             <h1>Fill all the requirements</h1>
             <form onSubmit={handleSubmit}>
-                <label>Enter Pin Code:</label>
+                <label>Enter Pin Code/Address:</label>
                 <br />
-                <input placeholder={lat + "  " + long} />
+                <br />
+                <br />
+                <br />
+                <label>Coordinates:</label>
+                <div className='coordinates'>   
+                    <input placeholder={lat} />
+                    <input placeholder={long} />
+                </div>
+
                 <br />
                 <label>Select the service</label>
                 <br />

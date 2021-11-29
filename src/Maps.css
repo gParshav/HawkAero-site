@@ -1,7 +1,7 @@
 .search {
     position: absolute;
-    top: 3rem;
-    left: 50%;
+    top: 38%;
+    left: 75%;
     transform: translateX(-50%);
     width: 100%;
     max-width: 400px;
@@ -26,3 +26,9 @@
     width: 30px;
     cursor: pointer;
   }
+
+  .maps {
+    display: flex;
+  }
+
+  
