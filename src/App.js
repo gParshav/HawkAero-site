@@ -19,7 +19,7 @@ function App() {
         </Route>
         <Route path="/maps">
           <Maps />
-          <Details />
+          {/* <Details /> */}
         </Route>
     </Router>
   );

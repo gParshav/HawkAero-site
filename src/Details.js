@@ -3,7 +3,7 @@ import './Details.css'
 import Details2 from './Details2';
 import Weights from './Weights';
 
-function Details() {
+function Details({lat, long}) {
 
     const [title, setTitle] = useState('');
     const [duration, setDuration] = useState('');
@@ -24,12 +24,13 @@ function Details() {
             <h1>Fill all the requirements</h1>
             <form onSubmit={handleSubmit}>
                 <label>Enter Pin Code:</label>
-                <input type="text"
+                {/* <input type="text"
                        required
                        value={title}
                        onChange={(e) => setTitle(e.target.value)} 
 
-                       />
+                       /> */}
+                <input placeholder={lat + "  " + long} />
                 <label>Select the service</label>
                 <select
 

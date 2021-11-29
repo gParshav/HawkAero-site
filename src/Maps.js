@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import './Maps.css'
 import {GoogleMap, useLoadScript, Marker, InfoWindow} from "@react-google-maps/api"
 import usePlacesAutocomplete, {
@@ -15,6 +15,7 @@ import usePlacesAutocomplete, {
 import {format, formatRelative} from "date-fns"
 import  "@reach/combobox/styles.css"
 import mapStyles from './mapStyles'
+import Details from './Details';
 require('dotenv').config();
 
 const libraries = ["places"];
@@ -33,11 +34,6 @@ const center = {
 lat: 20.5937,
 lng: 78.9629,
 };
-console.log(1)
-console.log()
-// 
-// const KEY=
-console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
 function Maps() {
 
     const {isLoaded, loadError} = useLoadScript({
@@ -48,9 +44,15 @@ function Maps() {
 
     const [markers, setMarkers] = useState([]);
     const [selected, setSelected] = useState(null);
+    const [lat, setLat] = useState(0);
+    const [long, setLong] = useState(0);
 
+    // useEffect(() => {
+    //   console.log(markers)
+    // }, []); // Only re-subscribe if props.friend.id changes
 
     const onMapClick = useCallback((e) => {
+
         setMarkers((current) => [
           ...current,
           {
@@ -59,6 +61,9 @@ function Maps() {
             time: new Date(),
           },
         ]);
+        setLat(e.latLng.lat());
+        setLong(e.latLng.lng());
+        // console.log(lat, long)
       }, []);
 
     
@@ -91,6 +96,7 @@ function Maps() {
                 options={options}
                 onClick={onMapClick}
                 onLoad={onMapLoad}
+                
             >
             {markers.map((marker) => (
           <Marker 
@@ -103,7 +109,8 @@ function Maps() {
               scaledSize: new window.google.maps.Size(30, 30),
             }}
             onClick={() => {
-                setSelected(marker)
+                setSelected(marker);
+                
             }}
           />
             ))}
@@ -117,6 +124,7 @@ function Maps() {
                 </InfoWindow>
             ) : null}
             </GoogleMap>
+            <Details lat={lat} long={long} />
         </div>
     )
 }
