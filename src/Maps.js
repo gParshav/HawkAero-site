@@ -25,7 +25,7 @@ const mapContainerStyle = {
 };
 
 const options = {
-styles: mapStyles,
+// styles: mapStyles,
 disableDefaultUI: true,
 zoomControl: true,
 };
@@ -73,6 +73,8 @@ function Maps() {
     }, []);
 
     const panTo = useCallback(({lat, lng}) => {
+      setLat(lat);
+      setLong(lng);
       mapRef.current.panTo({lat, lng})
       mapRef.current.setZoom(14)
       }, []);
@@ -88,7 +90,7 @@ function Maps() {
         <div className='maps'>
             <Locate panTo={panTo} />
             <Search panTo={panTo} />
-            
+            <Details lat={lat} long={long} />
             <GoogleMap
                 id="map"
                 mapContainerStyle={mapContainerStyle}
@@ -125,7 +127,7 @@ function Maps() {
                 </InfoWindow>
             ) : null}
             </GoogleMap>
-            <Details lat={lat} long={long} />
+            
         </div>
     )
 }

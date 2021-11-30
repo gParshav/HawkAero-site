@@ -1,7 +1,7 @@
 .search {
     position: absolute;
     top: 38%;
-    left: 75%;
+    left: 25%;
     transform: translateX(-50%);
     width: 100%;
     max-width: 400px;
@@ -32,5 +32,5 @@
   }
 
   .locate{
-    right: 50%;
+    right: 0%;
   }
