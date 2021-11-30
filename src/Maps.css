@@ -1,6 +1,6 @@
 .search {
     position: absolute;
-    top: 38%;
+    top: 28%;
     left: 25%;
     transform: translateX(-50%);
     width: 100%;
@@ -33,4 +33,18 @@
 
   .locate{
     right: 0%;
+  }
+
+  .coordinates2 {
+    display: flex;
+    height: 10px;
+  }
+
+  .click {
+    /* top: 100%; */
+    position: absolute;
+    top: 20%;
+    left: 18%;
+    color: indigo;
+    cursor: pointer;
   }

@@ -3,7 +3,7 @@ import './Details.css'
 import Details2 from './Details2';
 import Weights from './Weights';
 
-function Details({lat, long}) {
+function Details({lat, lng, setLat, setLng, panTo}) {
 
 
     const [work, setWork] = useState('');
@@ -29,40 +29,40 @@ function Details({lat, long}) {
         document.getElementById(e.target.id).classList.add("service_selected");
     }
 
+    const handleCoordClick = (e) => {
+        lat=parseInt(lat);
+        lng=parseInt(lng);
+        panTo({lat, lng})
+    }
+
     return (
         <div className='details'>
             <h1>Fill all the requirements</h1>
             <form onSubmit={handleSubmit}>
-                <label>Enter Pin Code/Address:</label>
-                <br />
+                <label>Enter Pin Code/Address Or</label>
+                <br/>
+                <br/>
+                <br/>
                 <br />
                 <br />
                 <br />
                 <label>Coordinates:</label>
                 <div className='coordinates'>   
-                    <input placeholder={lat} />
-                    <input placeholder={long} />
-                </div>
+                    <input placeholder="Latitude" value={lat} onChange={(e) => setLat(e.target.value)} />
+                    <input placeholder="Longitude" value={lng} onChange={(e) => setLng(e.target.value)}/>
+                    <button onClick={handleCoordClick}>Submit</button>
+                </div> 
 
+                <br />
                 <br />
                 <label>Select the service</label>
                 <br />
-                {/* <select
-
-                       type="text"
-                       required
-                       value={work}
-                       onChange={(e) => setWork(e.target.value)}
-
-                
-                > */}
                 
                     <div className="service" id="Mapping" onClick={(e) => handleClick(e, "Mapping")} key="1" value="Mapping">Mapping</div>
                     <div className="service" id="Surveillance" onClick={(e) => handleClick(e, "Surveillance")} key="2" value="Surveillance">Surveillance</div>
                     <div className="service" id="Inspection" onClick={(e) => handleClick(e, "Inspection")} key="3" value="Inspection">Inspection</div>
                     <div className="service" id="Delivery" onClick={(e) => handleClick(e, "Delivery")} key="4" value="Delivery">Delivery</div>
                     <div className="service" id="Spraying" onClick={(e) => handleClick(e, "Spraying")} key="5" value="Spraying">Spraying</div>
-                {/* </select> */}
                 {work && <Details2 work={work} />}
                 <div className="cover"></div>
             </form>

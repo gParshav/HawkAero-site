@@ -45,7 +45,7 @@ function Maps() {
     const [markers, setMarkers] = useState([]);
     const [selected, setSelected] = useState(null);
     const [lat, setLat] = useState(0);
-    const [long, setLong] = useState(0);
+    const [lng, setLng] = useState(0);
 
     // useEffect(() => {
     //   console.log(markers)
@@ -62,8 +62,8 @@ function Maps() {
           },
         ]);
         setLat(e.latLng.lat());
-        setLong(e.latLng.lng());
-        // console.log(lat, long)
+        setLng(e.latLng.lng());
+        // console.log(lat, lng)
       }, []);
 
     
@@ -73,8 +73,10 @@ function Maps() {
     }, []);
 
     const panTo = useCallback(({lat, lng}) => {
+      console.log(lat, lng)
+
       setLat(lat);
-      setLong(lng);
+      setLng(lng);
       mapRef.current.panTo({lat, lng})
       mapRef.current.setZoom(14)
       }, []);
@@ -87,10 +89,15 @@ function Maps() {
     
 
     return (
+      <>
+        
         <div className='maps'>
             <Locate panTo={panTo} />
             <Search panTo={panTo} />
-            <Details lat={lat} long={long} />
+            <Current panTo={panTo} />
+            
+            {/* <Location /> */}
+            <Details lat={lat} lng={lng} setLat={setLat} setLng={setLng} panTo={panTo} />
             <GoogleMap
                 id="map"
                 mapContainerStyle={mapContainerStyle}
@@ -129,6 +136,7 @@ function Maps() {
             </GoogleMap>
             
         </div>
+        </>
     )
 }
 
@@ -150,6 +158,27 @@ function Locate({ panTo }) {
     >
       <img src="/download.png" alt="compass" />
     </button>
+  );
+}
+
+function Current({ panTo }) {
+  return (
+    <p
+      className="click"
+      onClick={() => {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            panTo({
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            });
+          },
+          () => null
+        );
+      }}
+    >
+      Use your current location
+    </p>
   );
 }
 
@@ -212,5 +241,15 @@ function Search({panTo}) {
           </Combobox>
         </div>
       );
+}
+
+function Location(){
+  return (
+    <div className='coordinates2'>             
+      <input placeholder="0" />
+      <input placeholder="0" />
+    </div>
+  
+  )
 }
 export default Maps
