@@ -29,9 +29,9 @@ function Details2({work}) {
         <label className="label">Select the type</label>
         <br />
        
-                {choices[work].map((choice) => {
+                {choices[work].map((choice, id) => {
                     return (
-                        <div className="service" id={choice} onClick={(e) => handleClick(e, choice)} key="1" value={choice}>{choice}</div>
+                        <div className="service" id={id} onClick={(e) => handleClick(e, choice)} key="1" value={choice}>{choice}</div>
                    )
                 })}
                  

@@ -48,3 +48,8 @@
     color: indigo;
     cursor: pointer;
   }
+
+  .flag{
+    width: 50%;
+    height: 100%;
+  }

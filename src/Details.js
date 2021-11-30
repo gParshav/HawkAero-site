@@ -8,6 +8,7 @@ function Details({lat, lng, setLat, setLng, panTo}) {
 
     const [work, setWork] = useState('');
     const [category, setCategory] = useState('');
+    const [flag, setFlag] = useState(false);
     
 
 
@@ -30,8 +31,9 @@ function Details({lat, lng, setLat, setLng, panTo}) {
     }
 
     const handleCoordClick = (e) => {
-        lat=parseInt(lat);
-        lng=parseInt(lng);
+        lat=parseFloat(lat);
+        lng=parseFloat(lng);
+        setFlag(true);
         panTo({lat, lng})
     }
 
@@ -39,7 +41,6 @@ function Details({lat, lng, setLat, setLng, panTo}) {
         <div className='details'>
             <h1>Fill all the requirements</h1>
             <form onSubmit={handleSubmit}>
-                <label>Enter Pin Code/Address Or</label>
                 <br/>
                 <br/>
                 <br/>
@@ -55,6 +56,8 @@ function Details({lat, lng, setLat, setLng, panTo}) {
 
                 <br />
                 <br />
+                {flag &&
+                <>
                 <label>Select the service</label>
                 <br />
                 
@@ -63,6 +66,8 @@ function Details({lat, lng, setLat, setLng, panTo}) {
                     <div className="service" id="Inspection" onClick={(e) => handleClick(e, "Inspection")} key="3" value="Inspection">Inspection</div>
                     <div className="service" id="Delivery" onClick={(e) => handleClick(e, "Delivery")} key="4" value="Delivery">Delivery</div>
                     <div className="service" id="Spraying" onClick={(e) => handleClick(e, "Spraying")} key="5" value="Spraying">Spraying</div>
+                    </>
+                 }
                 {work && <Details2 work={work} />}
                 <div className="cover"></div>
             </form>

@@ -46,6 +46,8 @@ function Maps() {
     const [selected, setSelected] = useState(null);
     const [lat, setLat] = useState(0);
     const [lng, setLng] = useState(0);
+    const [currloc, setCurrloc] = useState(true);
+
 
     // useEffect(() => {
     //   console.log(markers)
@@ -53,8 +55,8 @@ function Maps() {
 
     const onMapClick = useCallback((e) => {
 
-        setMarkers((current) => [
-          ...current,
+        setCurrloc(true);
+        setMarkers([
           {
             lat: e.latLng.lat(),
             lng: e.latLng.lng(),
@@ -63,6 +65,7 @@ function Maps() {
         ]);
         setLat(e.latLng.lat());
         setLng(e.latLng.lng());
+
         // console.log(lat, lng)
       }, []);
 
@@ -74,9 +77,16 @@ function Maps() {
 
     const panTo = useCallback(({lat, lng}) => {
       console.log(lat, lng)
-
+      setMarkers([
+        {
+          lat: lat,
+          lng: lng,
+          time: new Date(),
+        },
+      ]);
       setLat(lat);
       setLng(lng);
+
       mapRef.current.panTo({lat, lng})
       mapRef.current.setZoom(14)
       }, []);
@@ -93,11 +103,12 @@ function Maps() {
         
         <div className='maps'>
             <Locate panTo={panTo} />
-            <Search panTo={panTo} />
-            <Current panTo={panTo} />
+          <Search panTo={panTo} lat={lat} lng={lng} setLat={setLat} setLng={setLng} currloc={currloc} setCurrloc={setCurrloc}/>
+            <Current panTo={panTo} setCurrloc={setCurrloc} />
             
-            {/* <Location /> */}
-            <Details lat={lat} lng={lng} setLat={setLat} setLng={setLng} panTo={panTo} />
+            
+              <Details lat={lat} lng={lng} setLat={setLat} setLng={setLng} panTo={panTo} />
+            
             <GoogleMap
                 id="map"
                 mapContainerStyle={mapContainerStyle}
@@ -123,7 +134,9 @@ function Maps() {
                 
             }}
           />
+          
             ))}
+            
 
             {selected ? (
                 <InfoWindow position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => setSelected(null)}>
@@ -161,33 +174,40 @@ function Locate({ panTo }) {
   );
 }
 
-function Current({ panTo }) {
+function Current({ panTo, setCurrloc }) {
+
+  const handleClick = () => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        panTo({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      },
+      () => null
+    );
+    setCurrloc(true)
+  }
+
   return (
     <p
       className="click"
-      onClick={() => {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            panTo({
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            });
-          },
-          () => null
-        );
-      }}
+      onClick={handleClick}
     >
       Use your current location
     </p>
   );
 }
 
-function Search({panTo}) {
+function Search({panTo, lat, lng, setLat, setLng, currloc, setCurrloc}) {
 
     const handleInput = (e) => {
         setValue(e.target.value);
+        
       };
     
+      
+
       const handleSelect = async (address) => {
         setValue(address, false);
         clearSuggestions();
@@ -206,16 +226,21 @@ function Search({panTo}) {
         radius: 100 * 1000,
       },
     });
+
+    if(!value && !currloc){
+      setLat(0);
+      setLng(0);
+    }
     
-    
+
 
     return (
         <div className="search">
-          <Combobox onSelect={async (address) => {
+          <Combobox  onSelect={async (address) => {
             setValue(address, false);
             clearSuggestions();
             try{
-              
+              setCurrloc(false);
               const results = await getGeocode({address});
               const {lat,lng} = await getLatLng(results[0]);
               panTo({lat,lng})
