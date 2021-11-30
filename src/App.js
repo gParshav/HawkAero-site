@@ -21,6 +21,7 @@ function App() {
           <Maps />
           {/* <Details /> */}
         </Route>
+        
     </Router>
   );
 }

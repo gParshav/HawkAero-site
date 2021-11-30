@@ -12,10 +12,13 @@ import usePlacesAutocomplete, {
     ComboboxList,
     ComboboxOption,
   } from "@reach/combobox";
-import {format, formatRelative} from "date-fns"
+import {add, format, formatRelative} from "date-fns"
 import  "@reach/combobox/styles.css"
 import mapStyles from './mapStyles'
 import Details from './Details';
+import Geocode from "react-geocode";
+Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
+Geocode.enableDebug();
 require('dotenv').config();
 
 const libraries = ["places"];
@@ -46,8 +49,8 @@ function Maps() {
     const [selected, setSelected] = useState(null);
     const [lat, setLat] = useState(0);
     const [lng, setLng] = useState(0);
-    const [currloc, setCurrloc] = useState(true);
-
+    const [currloc, setCurrloc] = useState(false);
+    const [saddress, setSaddress] = useState('');
 
     // useEffect(() => {
     //   console.log(markers)
@@ -55,6 +58,7 @@ function Maps() {
 
     const onMapClick = useCallback((e) => {
 
+        // console.log(e.latLng)
         setCurrloc(true);
         setMarkers([
           {
@@ -63,6 +67,20 @@ function Maps() {
             time: new Date(),
           },
         ]);
+        
+        const lat2=e.latLng.lat().toString();
+        const lng2=e.latLng.lng().toString();
+        console.log(e.latLng.lat(), e.latLng.lng())
+        Geocode.fromLatLng(lat2, lng2).then(
+          response => {
+            const address = response.results[0].formatted_address;
+            setSaddress(address);
+            console.log(address);
+          },
+          error => {
+            console.error(error);
+          }
+        );
         setLat(e.latLng.lat());
         setLng(e.latLng.lng());
 
@@ -76,7 +94,7 @@ function Maps() {
     }, []);
 
     const panTo = useCallback(({lat, lng}) => {
-      console.log(lat, lng)
+      // console.log(lat, lng)
       setMarkers([
         {
           lat: lat,
@@ -87,6 +105,7 @@ function Maps() {
       setLat(lat);
       setLng(lng);
 
+      // console.log(mapRef.current);
       mapRef.current.panTo({lat, lng})
       mapRef.current.setZoom(14)
       }, []);
@@ -103,12 +122,9 @@ function Maps() {
         
         <div className='maps'>
             <Locate panTo={panTo} />
-          <Search panTo={panTo} lat={lat} lng={lng} setLat={setLat} setLng={setLng} currloc={currloc} setCurrloc={setCurrloc}/>
-            <Current panTo={panTo} setCurrloc={setCurrloc} />
-            
-            
-              <Details lat={lat} lng={lng} setLat={setLat} setLng={setLng} panTo={panTo} />
-            
+            <Search panTo={panTo} lat={lat} lng={lng} setLat={setLat} setLng={setLng} currloc={currloc} setCurrloc={setCurrloc} saddress={saddress}/>
+            <Current panTo={panTo} setCurrloc={setCurrloc} setSaddress={setSaddress} />
+            <Details lat={lat} lng={lng} setLat={setLat} setLng={setLng} panTo={panTo} />
             <GoogleMap
                 id="map"
                 mapContainerStyle={mapContainerStyle}
@@ -174,7 +190,7 @@ function Locate({ panTo }) {
   );
 }
 
-function Current({ panTo, setCurrloc }) {
+function Current({ panTo, setCurrloc, setSaddress }) {
 
   const handleClick = () => {
     navigator.geolocation.getCurrentPosition(
@@ -183,9 +199,22 @@ function Current({ panTo, setCurrloc }) {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
+        const lat2=position.coords.latitude.toString();
+        const lng2=position.coords.longitude.toString();
+        Geocode.fromLatLng(lat2, lng2).then(
+          response => {
+            const address = response.results[0].formatted_address;
+            setSaddress(address);
+            console.log(address);
+          },
+          error => {
+            console.error(error);
+          }
+        );
       },
       () => null
     );
+        
     setCurrloc(true)
   }
 
@@ -199,9 +228,10 @@ function Current({ panTo, setCurrloc }) {
   );
 }
 
-function Search({panTo, lat, lng, setLat, setLng, currloc, setCurrloc}) {
+function Search({panTo, lat, lng, setLat, setLng, currloc, setCurrloc, saddress}) {
 
     const handleInput = (e) => {
+      setCurrloc(false)
         setValue(e.target.value);
         
       };
@@ -226,6 +256,10 @@ function Search({panTo, lat, lng, setLat, setLng, currloc, setCurrloc}) {
         radius: 100 * 1000,
       },
     });
+
+    useEffect(() => {
+      setValue(saddress, false);
+    }, [saddress])
 
     if(!value && !currloc){
       setLat(0);

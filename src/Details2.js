@@ -31,7 +31,7 @@ function Details2({work}) {
        
                 {choices[work].map((choice, id) => {
                     return (
-                        <div className="service" id={id} onClick={(e) => handleClick(e, choice)} key="1" value={choice}>{choice}</div>
+                        <div className="service" id={id} onClick={(e) => handleClick(e, choice)} key={id} value={choice}>{choice}</div>
                    )
                 })}
                  
