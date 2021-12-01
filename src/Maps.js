@@ -66,6 +66,7 @@ function Maps() {
             lat: e.latLng.lat(),
             lng: e.latLng.lng(),
             time: new Date(),
+            // draggable: true,
           },
         ]);
         
@@ -121,9 +122,9 @@ function Maps() {
       <>
         
         <div className='maps'>
-            <Locate panTo={panTo} lat={lat} lng={lng} setCurrloc={setCurrloc} setSaddress={setSaddress} setLat={setLat} setLng={setLng}/>
+            <Locate panTo={panTo} lat={lat} lng={lng} setCurrloc={setCurrloc} setSaddress={setSaddress} setLat={setLat} setLng={setLng} setFlag={setFlag}/>
             <Search panTo={panTo} lat={lat} lng={lng} setLat={setLat} setLng={setLng} currloc={currloc} setCurrloc={setCurrloc} saddress={saddress} setFlag={setFlag}/>
-            <Current panTo={panTo} setCurrloc={setCurrloc} setSaddress={setSaddress} />
+            <Current panTo={panTo} setCurrloc={setCurrloc} setSaddress={setSaddress} setFlag={setFlag} />
             <Details lat={lat} lng={lng} setLat={setLat} setLng={setLng} panTo={panTo} setSaddress={setSaddress} setCurrloc={setCurrloc} flag={flag} setFlag={setFlag} />
             <GoogleMap
                 id="map"
@@ -144,11 +145,18 @@ function Maps() {
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(15, 15),
               scaledSize: new window.google.maps.Size(30, 30),
+              
             }}
             onClick={() => {
                 setSelected(marker);
                 
             }}
+            draggable
+            // onDrag={() => console.log(1)}
+            // onDragStart={() => console.log(1)}
+            onDragEnd={onMapClick}
+            // onDrag={onMapClick}
+          
           />
           
             ))}
@@ -169,7 +177,7 @@ function Maps() {
     )
 }
 
-function Locate({ panTo,setCurrloc, lat, lng ,setSaddress, setLat, setLng }) {
+function Locate({ panTo,setCurrloc, lat, lng ,setSaddress, setLat, setLng , setFlag}) {
   const handleClick = () => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -177,6 +185,7 @@ function Locate({ panTo,setCurrloc, lat, lng ,setSaddress, setLat, setLng }) {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
+        setFlag(true);
         const lat2=position.coords.latitude.toString();
     const lng2=position.coords.longitude.toString();
     Geocode.fromLatLng(lat2, lng2).then(
@@ -209,7 +218,7 @@ function Locate({ panTo,setCurrloc, lat, lng ,setSaddress, setLat, setLng }) {
   );
 }
 
-function Current({ panTo, setCurrloc, setSaddress }) {
+function Current({ panTo, setCurrloc, setSaddress, setFlag }) {
 
   const handleClick = () => {
     navigator.geolocation.getCurrentPosition(
@@ -218,6 +227,7 @@ function Current({ panTo, setCurrloc, setSaddress }) {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
+        setFlag(true);
         const lat2=position.coords.latitude.toString();
         const lng2=position.coords.longitude.toString();
         Geocode.fromLatLng(lat2, lng2).then(
