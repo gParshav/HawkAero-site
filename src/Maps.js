@@ -51,6 +51,7 @@ function Maps() {
     const [lng, setLng] = useState(0);
     const [currloc, setCurrloc] = useState(false);
     const [saddress, setSaddress] = useState('');
+    const [flag, setFlag] = useState(false);
 
     // useEffect(() => {
     //   console.log(markers)
@@ -70,7 +71,6 @@ function Maps() {
         
         const lat2=e.latLng.lat().toString();
         const lng2=e.latLng.lng().toString();
-        console.log(e.latLng.lat(), e.latLng.lng())
         Geocode.fromLatLng(lat2, lng2).then(
           response => {
             const address = response.results[0].formatted_address;
@@ -121,10 +121,10 @@ function Maps() {
       <>
         
         <div className='maps'>
-            <Locate panTo={panTo} />
-            <Search panTo={panTo} lat={lat} lng={lng} setLat={setLat} setLng={setLng} currloc={currloc} setCurrloc={setCurrloc} saddress={saddress}/>
+            <Locate panTo={panTo} lat={lat} lng={lng} setCurrloc={setCurrloc} setSaddress={setSaddress} setLat={setLat} setLng={setLng}/>
+            <Search panTo={panTo} lat={lat} lng={lng} setLat={setLat} setLng={setLng} currloc={currloc} setCurrloc={setCurrloc} saddress={saddress} setFlag={setFlag}/>
             <Current panTo={panTo} setCurrloc={setCurrloc} setSaddress={setSaddress} />
-            <Details lat={lat} lng={lng} setLat={setLat} setLng={setLng} panTo={panTo} setSaddress={setSaddress} />
+            <Details lat={lat} lng={lng} setLat={setLat} setLng={setLng} panTo={panTo} setSaddress={setSaddress} setCurrloc={setCurrloc} flag={flag} setFlag={setFlag} />
             <GoogleMap
                 id="map"
                 mapContainerStyle={mapContainerStyle}
@@ -169,21 +169,40 @@ function Maps() {
     )
 }
 
-function Locate({ panTo }) {
+function Locate({ panTo,setCurrloc, lat, lng ,setSaddress, setLat, setLng }) {
+  const handleClick = () => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        panTo({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+        const lat2=position.coords.latitude.toString();
+    const lng2=position.coords.longitude.toString();
+    Geocode.fromLatLng(lat2, lng2).then(
+      response => {
+        const address = response.results[0].formatted_address;
+        setSaddress(address);
+        console.log(address);
+      },
+      error => {
+        console.error(error);
+      }
+    );
+      },
+      () => null
+    );
+    
+    
+
+    setCurrloc(true);
+
+  }
+
   return (
     <button
       className="locate"
-      onClick={() => {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            panTo({
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            });
-          },
-          () => null
-        );
-      }}
+      onClick={handleClick}
     >
       <img src="/download.png" alt="compass" />
     </button>
@@ -228,7 +247,7 @@ function Current({ panTo, setCurrloc, setSaddress }) {
   );
 }
 
-function Search({panTo, lat, lng, setLat, setLng, currloc, setCurrloc, saddress}) {
+function Search({panTo, lat, lng, setLat, setLng, currloc, setCurrloc, saddress, setFlag}) {
 
     const handleInput = (e) => {
       setCurrloc(false)
@@ -275,6 +294,7 @@ function Search({panTo, lat, lng, setLat, setLng, currloc, setCurrloc, saddress}
             clearSuggestions();
             try{
               setCurrloc(false);
+              setFlag(true);
               const results = await getGeocode({address});
               const {lat,lng} = await getLatLng(results[0]);
               panTo({lat,lng})

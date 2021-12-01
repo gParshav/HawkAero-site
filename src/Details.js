@@ -6,12 +6,12 @@ import Geocode from "react-geocode";
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 Geocode.enableDebug();
 
-function Details({lat, lng, setLat, setLng, panTo, setSaddress}) {
+function Details({lat, lng, setLat, setLng, panTo, setSaddress, setCurrloc, flag, setFlag}) {
 
 
     const [work, setWork] = useState('');
     const [category, setCategory] = useState('');
-    const [flag, setFlag] = useState(false);
+    
     
 
 
@@ -34,6 +34,11 @@ function Details({lat, lng, setLat, setLng, panTo, setSaddress}) {
     }
 
     const handleCoordClick = (e) => {
+        
+        lat=parseFloat(lat);
+        lng=parseFloat(lng);
+        setFlag(true);
+        panTo({lat, lng})
         const lat2=lat.toString();
         const lng2=lng.toString();
         Geocode.fromLatLng(lat2, lng2).then(
@@ -46,10 +51,16 @@ function Details({lat, lng, setLat, setLng, panTo, setSaddress}) {
             console.error(error);
           }
         );
-        lat=parseFloat(lat);
-        lng=parseFloat(lng);
-        setFlag(true);
-        panTo({lat, lng})
+    }
+
+    const handleLatChange = (e) => {
+        setCurrloc(true)
+        setLat(e.target.value)
+    }
+
+    const handleLngChange = (e) => {
+        setCurrloc(true)
+        setLng(e.target.value)
     }
 
     return (
@@ -64,8 +75,8 @@ function Details({lat, lng, setLat, setLng, panTo, setSaddress}) {
                 <br />
                 <label>Coordinates:</label>
                 <div className='coordinates'>   
-                    <input placeholder="Latitude" value={lat} onChange={(e) => setLat(e.target.value)} />
-                    <input placeholder="Longitude" value={lng} onChange={(e) => setLng(e.target.value)}/>
+                    <input placeholder="Latitude" value={lat} onChange={handleLatChange} />
+                    <input placeholder="Longitude" value={lng} onChange={handleLngChange}/>
                     <button onClick={handleCoordClick}>Submit</button>
                 </div> 
 
