@@ -124,7 +124,7 @@ function Maps() {
             <Locate panTo={panTo} />
             <Search panTo={panTo} lat={lat} lng={lng} setLat={setLat} setLng={setLng} currloc={currloc} setCurrloc={setCurrloc} saddress={saddress}/>
             <Current panTo={panTo} setCurrloc={setCurrloc} setSaddress={setSaddress} />
-            <Details lat={lat} lng={lng} setLat={setLat} setLng={setLng} panTo={panTo} />
+            <Details lat={lat} lng={lng} setLat={setLat} setLng={setLng} panTo={panTo} setSaddress={setSaddress} />
             <GoogleMap
                 id="map"
                 mapContainerStyle={mapContainerStyle}

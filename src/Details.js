@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import './Details.css'
 import Details2 from './Details2';
 import Weights from './Weights';
+import Geocode from "react-geocode";
+Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
+Geocode.enableDebug();
 
-function Details({lat, lng, setLat, setLng, panTo}) {
+function Details({lat, lng, setLat, setLng, panTo, setSaddress}) {
 
 
     const [work, setWork] = useState('');
@@ -31,6 +34,18 @@ function Details({lat, lng, setLat, setLng, panTo}) {
     }
 
     const handleCoordClick = (e) => {
+        const lat2=lat.toString();
+        const lng2=lng.toString();
+        Geocode.fromLatLng(lat2, lng2).then(
+          response => {
+            const address = response.results[0].formatted_address;
+            setSaddress(address);
+            console.log(address);
+          },
+          error => {
+            console.error(error);
+          }
+        );
         lat=parseFloat(lat);
         lng=parseFloat(lng);
         setFlag(true);
