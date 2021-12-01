@@ -60,5 +60,12 @@
 }
 
 .coordinates {
+    margin: 25px;
     display: flex;
+    flex-direction: column;
+}
+
+.coordinates_input {
+    display: flex; 
+     flex-direction: row;
 }

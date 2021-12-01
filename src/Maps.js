@@ -23,8 +23,8 @@ require('dotenv').config();
 
 const libraries = ["places"];
 const mapContainerStyle = {
-    height: "80vh",
-    width: "50vw",
+    height: "90vh",
+    width: "100%",
 };
 
 const options = {
@@ -122,10 +122,17 @@ function Maps() {
       <>
         
         <div className='maps'>
-            <Locate panTo={panTo} lat={lat} lng={lng} setCurrloc={setCurrloc} setSaddress={setSaddress} setLat={setLat} setLng={setLng} setFlag={setFlag}/>
-            <Search panTo={panTo} lat={lat} lng={lng} setLat={setLat} setLng={setLng} currloc={currloc} setCurrloc={setCurrloc} saddress={saddress} setFlag={setFlag}/>
+        
+            
+            <div className='first'>
+            <h1 className='fill'>Fill all the requirements</h1>
             <Current panTo={panTo} setCurrloc={setCurrloc} setSaddress={setSaddress} setFlag={setFlag} />
+            <Search panTo={panTo} lat={lat} lng={lng} setLat={setLat} setLng={setLng} currloc={currloc} setCurrloc={setCurrloc} saddress={saddress} setFlag={setFlag}/>
             <Details lat={lat} lng={lng} setLat={setLat} setLng={setLng} panTo={panTo} setSaddress={setSaddress} setCurrloc={setCurrloc} flag={flag} setFlag={setFlag} />
+            
+            </div>
+            
+            <div className='second'>
             <GoogleMap
                 id="map"
                 mapContainerStyle={mapContainerStyle}
@@ -136,6 +143,7 @@ function Maps() {
                 onLoad={onMapLoad}
                 
             >
+            <Locate panTo={panTo} lat={lat} lng={lng} setCurrloc={setCurrloc} setSaddress={setSaddress} setLat={setLat} setLng={setLng} setFlag={setFlag}/>
             {markers.map((marker) => (
           <Marker 
           key={`${marker.lat}-${marker.lng}`}
@@ -171,7 +179,7 @@ function Maps() {
                 </InfoWindow>
             ) : null}
             </GoogleMap>
-            
+            </div>
         </div>
         </>
     )
@@ -299,6 +307,7 @@ function Search({panTo, lat, lng, setLat, setLng, currloc, setCurrloc, saddress,
 
     return (
         <div className="search">
+        
           <Combobox  onSelect={async (address) => {
             setValue(address, false);
             clearSuggestions();

@@ -65,19 +65,22 @@ function Details({lat, lng, setLat, setLng, panTo, setSaddress, setCurrloc, flag
 
     return (
         <div className='details'>
-            <h1>Fill all the requirements</h1>
+            
             <form onSubmit={handleSubmit}>
-                <br/>
+                {/* <br/>
                 <br/>
                 <br/>
                 <br />
                 <br />
-                <br />
-                <label>Coordinates:</label>
-                <div className='coordinates'>   
+                <br /> */}
+                
+                <div className='coordinates'> 
+                <div className='coordinates_head'>Coordinates:</div>  
+                <div className='coordinates_input'>
                     <input placeholder="Latitude" value={lat} onChange={handleLatChange} />
                     <input placeholder="Longitude" value={lng} onChange={handleLngChange}/>
                     <button onClick={handleCoordClick}>Submit</button>
+                </div>
                 </div> 
 
                 <br />
