@@ -3,7 +3,7 @@ import HeroSection from './HeroSection'
 import './Home.css'
 function Home() {
     return (
-        <div>
+        <div className='home'>
             <HeroSection />
         </div>
     )
