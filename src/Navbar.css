@@ -47,7 +47,7 @@
   .topListItem {
     margin-right: 20px;
     font-size: 18px;
-    font-weight: 300;
+    font-weight: 520;
     cursor: pointer;
     color: white;
     padding: 10px;
@@ -95,6 +95,11 @@
 
     .topLeft{
       display: none;
+    }
+
+    .topListItem {
+      font-weight: 600;
+      
     }
   }
   
