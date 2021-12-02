@@ -14,8 +14,10 @@ function Details2({work}) {
 
     const [type, setType] = useState('');
     const [prev, setPrev] = useState('');
+    const [flag, setFlag] = useState(true);
     const handleClick = (e, value) => {
         setType(value);
+        setFlag(!flag);
         if(prev){
             document.getElementById(prev).classList.remove("service_selected");
             setPrev('');
@@ -28,12 +30,21 @@ function Details2({work}) {
         <br />
         {/* <label className="label">Select the type</label> */}
         <br />
-       
+                {/* {!flag && choices[work].map((choice, id) => {
+                    {choice=={type} &&
+                
+                      
+                        <div className="service" id={id} onClick={(e) => handleClick(e, choice)} key={id} value={choice}>{choice}</div>
+                        
+                   }
+                }) } */}
                 {choices[work].map((choice, id) => {
                     return (
                         <div className="service" id={id} onClick={(e) => handleClick(e, choice)} key={id} value={choice}>{choice}</div>
                    )
-                })}
+                }) }
+                    
+                
                  
                 
                 {type && <Weights work={work} />}

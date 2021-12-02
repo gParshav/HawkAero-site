@@ -55,6 +55,11 @@ const mapContainerStyle = {
   width: "100%",
 };
 
+const mapContainerStyle2 = {
+  height: "50vh",
+  width: "100%",
+};
+
 const options = {
 // styles: mapStyles,
 disableDefaultUI: true,
@@ -66,27 +71,6 @@ lat: 20.5937,
 lng: 78.9629,
 };
 function Maps() {
-  // let mapContainerStyle={
-  //   height: "90vh",
-  //      width: "100%",
-  // };
-  // useEffect(() => {
-  //   console.log(1)
-  //   if(window.innerWidth<900){
-  //     mapContainerStyle = {
-  //      height: "10vh",
-  //      width: "100%",
-  //    };
-  //  }
-  //  else{
-  //     mapContainerStyle = {
-  //      height: "90vh",
-  //      width: "100%",
-  //    };
-  //  }
-  // }, [window.innerWidth])
-  
-
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries,
@@ -181,6 +165,7 @@ function Maps() {
             </div>
             
             <div className='second'>
+            {window.innerWidth>900 ?
             <GoogleMap
                 id="map"
                 mapContainerStyle={mapContainerStyle}
@@ -227,7 +212,55 @@ function Maps() {
                     </div>
                 </InfoWindow>
             ) : null}
+            </GoogleMap> : 
+            <GoogleMap
+                id="map"
+                mapContainerStyle={mapContainerStyle2}
+                // className="mapSize"
+                zoom={8}
+                center={center}
+                options={options}
+                onClick={onMapClick}
+                onLoad={onMapLoad}
+                
+            >
+            <Locate panTo={panTo} lat={lat} lng={lng} setCurrloc={setCurrloc} setSaddress={setSaddress} setLat={setLat} setLng={setLng} setFlag={setFlag}/>
+            {markers.map((marker) => (
+          <Marker 
+          key={`${marker.lat}-${marker.lng}`}
+          position={{ lat: marker.lat, lng: marker.lng }} 
+          icon={{
+            //   url: `/images.png`,
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(15, 15),
+              scaledSize: new window.google.maps.Size(30, 30),
+              
+            }}
+            onClick={() => {
+                setSelected(marker);
+                
+            }}
+            draggable
+            // onDrag={() => console.log(1)}
+            // onDragStart={() => console.log(1)}
+            onDragEnd={onMapClick}
+            // onDrag={onMapClick}
+          
+          />
+          
+            ))}
+            
+
+            {selected ? (
+                <InfoWindow position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => setSelected(null)}>
+                    <div>
+                        <h2>Spotted</h2>
+                        <p>Spotted {formatRelative(selected.time, new Date())}</p>
+                    </div>
+                </InfoWindow>
+            ) : null}
             </GoogleMap>
+            }
             </div>
         </div>
         </>
