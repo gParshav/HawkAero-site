@@ -48,6 +48,7 @@
 .service_selected {
     background-color: rgb(149, 149, 240);
     color: white;
+    /* display: block; */
 }
 
 .service_selected:hover{

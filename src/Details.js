@@ -10,8 +10,9 @@ function Details({lat, lng, setLat, setLng, panTo, setSaddress, setCurrloc, flag
 
 
     const [work, setWork] = useState('');
+    const [work2, setWork2] = useState('');
     const [category, setCategory] = useState('');
-    
+    const [flag2, setFlag2] = useState(false);
     
 
 
@@ -24,13 +25,16 @@ function Details({lat, lng, setLat, setLng, panTo, setSaddress, setCurrloc, flag
 
     const [prev, setPrev] = useState('');
     const handleClick = (e, value) => {
+        setFlag(!flag);
         setWork(value);
+        setWork2(value);
         if(prev){
             document.getElementById(prev).classList.remove("service_selected");
             setPrev('');
         }
         setPrev(e.target.id);
         document.getElementById(e.target.id).classList.add("service_selected");
+        
     }
 
     const handleCoordClick = (e) => {
@@ -63,17 +67,14 @@ function Details({lat, lng, setLat, setLng, panTo, setSaddress, setCurrloc, flag
         setLng(e.target.value)
     }
 
+    const handleFlag = () => {
+        console.log(1)
+    }
+
     return (
         <div className='details'>
             
             <form onSubmit={handleSubmit}>
-                {/* <br/>
-                <br/>
-                <br/>
-                <br />
-                <br />
-                <br /> */}
-                
                 <div className='coordinates'> 
                 <div className='coordinates_head'>Coordinates:</div>  
                 <div className='coordinates_input'>
@@ -85,18 +86,33 @@ function Details({lat, lng, setLat, setLng, panTo, setSaddress, setCurrloc, flag
 
                 <br />
                 <br />
-                {flag &&
+
+                {flag ?
                 <>
-                {/* <label>Select the service</label> */}
-                <br />
                 
-                    <div className="service" id="Mapping" onClick={(e) => handleClick(e, "Mapping")} key="1" value="Mapping">Mapping</div>
+                    <div className="service" id="Mapping" onClick={(e) => handleClick(e, "Mapping")} key="Mapping" value="Mapping">Mapping</div>
                     <div className="service" id="Surveillance" onClick={(e) => handleClick(e, "Surveillance")} key="2" value="Surveillance">Surveillance</div>
                     <div className="service" id="Inspection" onClick={(e) => handleClick(e, "Inspection")} key="3" value="Inspection">Inspection</div>
                     <div className="service" id="Delivery" onClick={(e) => handleClick(e, "Delivery")} key="4" value="Delivery">Delivery</div>
                     <div className="service" id="Spraying" onClick={(e) => handleClick(e, "Spraying")} key="5" value="Spraying">Spraying</div>
-                    </>
-                 }
+                </> : <>
+                {work && work==='Mapping' && <div className="service service_selected" id="Mapping" onClick={(e) => handleClick(e, "Mapping")} key="Mapping" value="Mapping">Mapping</div>}
+                {work && work==='Surveillance' && <div className="service service_selected" id="Surveillance" onClick={(e) => handleClick(e, "Surveillance")} key="Surveillance" value="Surveillance">Surveillance</div>}
+                {work && work==='Inspection' && <div className="service service_selected" id="Inspection" onClick={(e) => handleClick(e, "Inspection")} key="Inspection" value="Inspection">Inspection</div>}
+                {work && work==='Delivery' && <div className="service service_selected" id="Delivery" onClick={(e) => handleClick(e, "Delivery")} key="Delivery" value="Delivery">Delivery</div>}
+                {work && work==='Spraying' && <div className="service service_selected" id="Spraying" onClick={(e) => handleClick(e, "Spraying")} key="Spraying" value="Spraying">Spraying</div>}
+                {/* {work && <div className="service" id={work} onClick={(e) => handleClick(e, {work})} key={work} value={work}>{work}</div>} */}
+                
+                
+                </> 
+                    
+                    
+                }
+                {/* {work2 ? <div className='service service_selected' id={work2} onClick={(e) => handleClick(e, {work2})} key="1" value={work2}>{work2}</div>: null} */}
+                {/* {work && <div className="service_selected" id={work} onClick={(e) => handleClick(e, {work})} key="1" value={work}>{work}</div>} */}
+
+                {/* {work ?  : null } */}
+                {/* <div className="service" id={work} onClick={(e) => handleClick(e, {work})} key="1" value={work}>{work}</div> */}
                 {work && <Details2 work={work} />}
                 <div className="cover"></div>
             </form>
