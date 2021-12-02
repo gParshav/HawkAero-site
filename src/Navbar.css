@@ -11,6 +11,12 @@
     font-family: "Josefin Sans", sans-serif;
   }
   
+  .topLeft{
+    color: white;
+    height: 10px;
+    z-index: 1000;
+  }
+
   .topLeft,
   .topRight {
     flex: 3;
@@ -70,3 +76,25 @@
   .link {
       text-decoration: none;
   }
+
+  @media (max-width:900px) {
+    .menu-icon {
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translate(-100%, 60%);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+  
+    .fa-times {
+      color: #fff;
+      font-size: 2rem;
+    }
+
+    .topLeft{
+      display: none;
+    }
+  }
+  

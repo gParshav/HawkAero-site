@@ -26,7 +26,7 @@ function Details2({work}) {
     return (
         <>
         <br />
-        <label className="label">Select the type</label>
+        {/* <label className="label">Select the type</label> */}
         <br />
        
                 {choices[work].map((choice, id) => {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './Weights.css'
 
 function Weights({work}) {
     const choices = {
@@ -27,7 +28,7 @@ function Weights({work}) {
     return (
         <>
         <br />
-        <label>Select Category</label>
+        {/* <label>Select Category</label> */}
         <br />
             {choices[work].map((choice) => {
                 return (
@@ -35,12 +36,13 @@ function Weights({work}) {
                 )
             })}
             {weight && 
-                    <div>
-                        <label>Enter Flying Duration:</label>
+                    <div className='duration'>
                         <input type="text"
                                 required
                                 value={duration}
+                                placeholder="Enter Flying Duration"
                                 onChange={(e) => setDuration(e.target.value)} 
+                                className='fly_duration'
 
                                 />
                         <button type="submit" >Submit</button>

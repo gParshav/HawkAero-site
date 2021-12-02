@@ -22,9 +22,37 @@ Geocode.enableDebug();
 require('dotenv').config();
 
 const libraries = ["places"];
+const mediaQuery = window.matchMedia("(max-width:900px)")
+
+// `@media(max-width:900px)`: {
+  //   height: "20vh",
+  //   width: "100%",
+  // },
+  
+    // return (
+    //   
+    // )
+// const mapContainerStyle = () => {
+  
+//   if(mediaQuery.matches){
+//     return {
+//       height: "90vh",
+//       width: "100%",
+//     }
+//   }
+
+//   else{
+//     return {
+//       height: "10vh",
+//       width: "100%",
+//     }
+//   }
+  
+// };
+
 const mapContainerStyle = {
-    height: "90vh",
-    width: "100%",
+  height: "90vh",
+  width: "100%",
 };
 
 const options = {
@@ -38,6 +66,26 @@ lat: 20.5937,
 lng: 78.9629,
 };
 function Maps() {
+  // let mapContainerStyle={
+  //   height: "90vh",
+  //      width: "100%",
+  // };
+  // useEffect(() => {
+  //   console.log(1)
+  //   if(window.innerWidth<900){
+  //     mapContainerStyle = {
+  //      height: "10vh",
+  //      width: "100%",
+  //    };
+  //  }
+  //  else{
+  //     mapContainerStyle = {
+  //      height: "90vh",
+  //      width: "100%",
+  //    };
+  //  }
+  // }, [window.innerWidth])
+  
 
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -136,6 +184,7 @@ function Maps() {
             <GoogleMap
                 id="map"
                 mapContainerStyle={mapContainerStyle}
+                // className="mapSize"
                 zoom={8}
                 center={center}
                 options={options}

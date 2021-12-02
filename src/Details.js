@@ -87,7 +87,7 @@ function Details({lat, lng, setLat, setLng, panTo, setSaddress, setCurrloc, flag
                 <br />
                 {flag &&
                 <>
-                <label>Select the service</label>
+                {/* <label>Select the service</label> */}
                 <br />
                 
                     <div className="service" id="Mapping" onClick={(e) => handleClick(e, "Mapping")} key="1" value="Mapping">Mapping</div>
