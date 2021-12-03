@@ -80,8 +80,8 @@ function Details({lat, lng, setLat, setLng, panTo, setSaddress, setCurrloc, flag
                 <div className='coordinates_input'>
                     <input placeholder="Latitude" value={lat} onChange={handleLatChange} />
                     <input placeholder="Longitude" value={lng} onChange={handleLngChange}/>
-                    <button onClick={handleCoordClick}>Submit</button>
                 </div>
+                <button className='Submit_Button' onClick={handleCoordClick}>Submit</button>
                 </div> 
 
                 <br />

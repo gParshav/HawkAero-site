@@ -20,12 +20,12 @@ export default function Navbar() {
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
       </div>
         <ul className="topList">
-        <Link className='link' to='/'>
+        {/* <Link className='link' to='/'>
             <li className="topListItem">HOME</li>
-        </Link>
-        <Link className='link' to='/maps'>
+        </Link> */}
+        {/* <Link className='link' to='/maps'>
             <li className="topListItem">ORDER</li>
-        </Link>
+        </Link> */}
         
           
         </ul>
