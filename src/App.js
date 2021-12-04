@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {Maps} from './Maps';
 import Home from './Home';
 import Footer from './Footer';
+import Cards from './Cards';
 
 // import Maps2 from './Maps2'
 
@@ -14,6 +15,7 @@ function App() {
       <Navbar />
       <Route exact path="/">
           <Home />
+          <Cards />
           <Footer />
         </Route>
         {/* <Route path="/details">

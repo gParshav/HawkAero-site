@@ -7,6 +7,9 @@ import Geocode from "react-geocode";
 import  Search  from './Search'
 import { useLoadScript } from '@react-google-maps/api';
 import { Link } from 'react-router-dom';
+import Cards from './Cards';
+import Footer from './Footer';
+
 const libraries = ["places"];
 function Home() {
     const {isLoaded, loadError} = useLoadScript({
@@ -105,14 +108,15 @@ function Home() {
                 
                 </div>
                 <Link to='/maps'>
-                <button className='drone'>Search all Drones</button>
+                <button className='drone p-2'>Search all Drones</button>
                 </Link>
                 </div>
                 {/* <img src="/man.jpg" /> */}
             </div>
-            <div className='home_center'>
-
+            {/* <div className='home_center'>
+                <Cards/>
             </div>
+            <Footer /> */}
         </div>
     )
 }
