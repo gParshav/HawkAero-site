@@ -1,3 +1,7 @@
+a{
+  text-decoration: none;
+}
+
 .top {
     width: 100%;
     height: 50px;
@@ -5,11 +9,10 @@
     border-bottom: 2px solid lightgray;
     box-shadow: lightgray;
     color: white;
-    position: sticky;
+    /* position: sticky; */
     top: 0;
     display: flex;
     align-items: center;
-    z-index: 999;
     font-family: "Josefin Sans", sans-serif;
   }
   
@@ -20,13 +23,14 @@
   .topLeft{
     color: black;
     height: 10px;
+    /* position: absolute; */
     /* font-weight: 10; */
     /* z-index: 1000; */
   }
 
   .topLeft,
   .topRight {
-    flex: 3;
+    /* flex: 3; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,16 +39,16 @@
   
   .topIcon {
     font-size: 20px;
-    margin-right: 10px;
+    /* margin-right: 10px; */
     color: #444;
     cursor: pointer;
   }
   
-  .topCenter {
+  /* .topCenter {
     flex: 6;
-  }
+  } */
   
-  .topList {
+  /* .topList {
     display: flex;
     justify-content: center;
     margin: 0;
@@ -64,6 +68,10 @@
   .topListItem:hover{
     border-bottom: 3px solid #fff;
     transition: all 0.2s ease-out;
+  } */
+
+  .top>span {
+    color: black;
   }
   
   .topImg {
@@ -83,6 +91,14 @@
 
   .link {
       text-decoration: none;
+  }
+
+  .drone {
+    border: none;
+    border-radius: 50px;
+    padding: 5px;
+    background-color: greenyellow;
+    cursor: pointer;
   }
 
   @media (max-width:900px) {

@@ -2,7 +2,7 @@ import './App.css';
 import Details from './Details';
 import Navbar from './Navbar';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Maps from './Maps';
+import {Maps} from './Maps';
 import Home from './Home';
 import Footer from './Footer';
 

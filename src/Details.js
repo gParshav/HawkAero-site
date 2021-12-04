@@ -3,6 +3,7 @@ import './Details.css'
 import Details2 from './Details2';
 import Weights from './Weights';
 import Geocode from "react-geocode";
+import { Input } from '@material-ui/core';
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 Geocode.enableDebug();
 
@@ -78,8 +79,8 @@ function Details({lat, lng, setLat, setLng, panTo, setSaddress, setCurrloc, flag
                 <div className='coordinates'> 
                 <div className='coordinates_head'>Coordinates:</div>  
                 <div className='coordinates_input'>
-                    <input placeholder="Latitude" value={lat} onChange={handleLatChange} />
-                    <input placeholder="Longitude" value={lng} onChange={handleLngChange}/>
+                    <Input placeholder="Latitude" value={lat} onChange={handleLatChange} />
+                    <Input placeholder="Longitude" value={lng} onChange={handleLngChange}/>
                 </div>
                 <button className='Submit_Button' onClick={handleCoordClick}>Submit</button>
                 </div> 
