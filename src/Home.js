@@ -4,7 +4,9 @@ import './Home.css'
 function Home() {
     return (
         <div className='home'>
-            <HeroSection />
+            <div className='homeTop' >
+                <img src="/man.jpg" />
+            </div>
         </div>
     )
 }

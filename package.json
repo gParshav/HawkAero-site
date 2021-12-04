@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@heroicons/react": "^1.0.5",
     "@reach/combobox": "^0.16.4",
     "@react-google-maps/api": "^2.7.0",
     "@testing-library/jest-dom": "^5.11.4",

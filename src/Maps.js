@@ -17,6 +17,7 @@ import  "@reach/combobox/styles.css"
 import mapStyles from './mapStyles'
 import Details from './Details';
 import Geocode from "react-geocode";
+import {SearchIcon} from '@heroicons/react/solid'
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 Geocode.enableDebug();
 require('dotenv').config();
@@ -404,12 +405,17 @@ function Search({panTo, lat, lng, setLat, setLng, currloc, setCurrloc, saddress,
               console.log(error)
             }
           }}>  
+          <div >
+
             <ComboboxInput
               value={value}
               onChange={handleInput}
               disabled={!ready}
               placeholder="Search your location"
             />
+            {/* <SearchIcon className="icon"/> */}
+          </div>
+            
             <ComboboxPopover>
           <ComboboxList>
             {status === "OK" &&

@@ -9,12 +9,16 @@ export default function Navbar() {
   const handleClick = () => setClick(!click);
   return (
     <div className="top">
+    
+
       <div className="topLeft">
-        <i className="topIcon fab fa-facebook-square"></i>
-        <i className="topIcon fab fa-instagram-square"></i>
-        <i className="topIcon fab fa-pinterest-square"></i>
-        <i className="topIcon fab fa-twitter-square"></i>
+      <Link to='/'>
+
+      <img className='hawkImg' src="./hawk1.jpeg" />
+      </Link>
+      <p>Hawk Aerospace</p>
       </div>
+    
       <div className="topCenter">
       <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
@@ -29,6 +33,12 @@ export default function Navbar() {
         
           
         </ul>
+      </div>
+      <div className="topRight">
+      <Link to='/maps'>
+        <button>Order Drone</button>
+      </Link>
+        
       </div>
       
     </div>

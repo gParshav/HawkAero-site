@@ -6,6 +6,15 @@
   width: 50%;
 }
 
+.icon{
+  height: 30px;
+  object-fit: contain;
+}
+
+.searchIcon {
+  display: flex;
+}
+
 .fill {
   font-size: 20px;
   color: #f1356d;
@@ -24,14 +33,20 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    
     /* max-width: 400px; */
     /* z-index: 10; */
   }
 
   .search input {
-    padding: 0.5rem;
+    padding: 0.8rem;
     font-size: 1rem;
     width: 50%;
+    border-radius: 20px;
+    outline-width: 0;
+    border: 1px solid lightgray;
+    /* border: gray 10px; */
+    
   }
 
   .locate {

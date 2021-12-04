@@ -12,13 +12,14 @@ function App() {
   return (
     <Router>
       <Navbar />
-      {/* <Route exact path="/">
+      <Route exact path="/">
           <Home />
-        </Route> */}
+          <Footer />
+        </Route>
         {/* <Route path="/details">
           <Details />
         </Route> */}
-        <Route exact path="/">
+        <Route  path="/maps">
           <Maps />
           <Footer />
         </Route>
