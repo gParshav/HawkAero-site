@@ -25,10 +25,17 @@
     margin-left: 100px;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
 }
 
 @media (max-width:900px) {
     .homeForm{
         margin-left: 0;
     }
+
+    /* .homeTop{
+        height: 80vh;
+        background-size: cover;
+        background-repeat: no-repeat;
+    } */
 }

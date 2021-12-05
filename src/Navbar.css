@@ -95,10 +95,18 @@ a{
 
   .drone {
     border: none;
-    border-radius: 50px;
+    /* border-radius: 50px;/ */
     padding: 5px;
     background-color: greenyellow;
     cursor: pointer;
+  }
+  .navbar{
+    box-shadow: 0 8px 20px rgba(56, 125, 255, 0.17);
+  }
+  .navbarItems:hover{
+    transition:0.2s ease-in ;
+    background-color: orange;
+    transform: scale(1.05);
   }
 
   @media (max-width:900px) {

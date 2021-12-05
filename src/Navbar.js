@@ -25,8 +25,8 @@ export default function Navbar() {
     //   </div>
       
     // </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white">
+  <div class="container-fluid ">
     
     <Link to='/'>
        <img className='hawkImg' src="./hawk1.jpeg" />
@@ -39,10 +39,21 @@ export default function Navbar() {
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
-        <a class="nav-link" href="#">Features</a>
-        <a class="nav-link" href="#">Pricing</a>
-        <a class="nav-link disabled">Disabled</a>
+      <Link to='/about'>
+        <a className="nav-link active navbarItems" aria-current="page" href="#">About</a>
+      </Link>
+        <Link to='/contact'>
+          <a className="nav-link navbarItems">Contact</a>
+        </Link>
+        <Link to='/pricing'>
+          <a className="nav-link navbarItems">Pricing</a>
+        </Link>
+        <Link to='/careers'>
+          <a className="nav-link navbarItems">Careers</a>
+        </Link>
+        <Link to='/investors'>
+          <a className="nav-link navbarItems">Investors</a>
+        </Link>
         
       </div>
       <Link to='/maps'>

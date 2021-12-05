@@ -45,7 +45,7 @@ function Weights({work}) {
                                 className='fly_duration'
 
                                 />
-                        <button type="submit" >Submit</button>
+                        <button type="submit" className='finalSubmit' >SUBMIT</button>
                         </div>
                    
             }
