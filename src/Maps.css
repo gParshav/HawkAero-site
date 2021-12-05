@@ -83,8 +83,23 @@
     /* top: 20%;
     left: 18%; */
     text-align: center;
-    color: indigo;
+    background: #1669C9;
+    border: 0;
+    padding: 7px;
+    border-radius: 50px;
+    color: white;
+    font-weight: 500;
     cursor: pointer;
+  }
+
+  .click:hover{
+    background-color: black;
+  }
+
+  .clickdiv{
+    display: flex;
+  justify-content: center;
+  align-items: center;
   }
 
   .flag{

@@ -342,12 +342,14 @@ function Current({ panTo, setCurrloc, setSaddress, setFlag }) {
   }
 
   return (
-    <p
-      className="click"
-      onClick={handleClick}
-    >
-      Use your current location
-    </p>
+    <div className='clickdiv my-2'>
+      <button
+        className="click"
+        onClick={handleClick}
+      >
+        Use your current location
+      </button>
+    </div>
   );
 }
 
