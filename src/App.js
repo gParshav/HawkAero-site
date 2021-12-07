@@ -6,6 +6,7 @@ import {Maps} from './Maps';
 import Home from './Home';
 import Footer from './Footer';
 import Cards from './Cards';
+import Pilot from './Pilot';
 
 // import Maps2 from './Maps2'
 
@@ -23,6 +24,10 @@ function App() {
         </Route> */}
         <Route  path="/maps">
           <Maps />
+          <Footer />
+        </Route>
+        <Route  path="/pilots">
+          <Pilot />
           <Footer />
         </Route>
         

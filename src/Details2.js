@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Weights from './Weights';
 
-function Details2({work}) {
+function Details2({work, saddress}) {
     const choices = {
         "Inspection" : ["Agriculture", "Powerline", "Road & Highway", "Pipeline", "Mining", "Construction", "Telecommunication"],
         "Surveillance" : ["Pipeline Surveillance", "Road & HIghway"],
@@ -47,7 +47,7 @@ function Details2({work}) {
                 
                  
                 
-                {type && <Weights work={work} />}
+                {type && <Weights work={work} type={type} saddress={saddress}/>}
         </>
     )
 }

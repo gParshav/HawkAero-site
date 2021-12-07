@@ -21,11 +21,10 @@ import {SearchIcon} from '@heroicons/react/solid'
 
 function Search({panTo, lat, lng, setLat, setLng, currloc, setCurrloc, saddress, setFlag}) {
 
-
-
     const handleInput = (e) => {
-      setCurrloc(false)
+        setCurrloc(false)
         setValue(e.target.value);
+        
         
       };
     
@@ -33,6 +32,7 @@ function Search({panTo, lat, lng, setLat, setLng, currloc, setCurrloc, saddress,
 
       const handleSelect = async (address) => {
         setValue(address, false);
+        // setSaddress(address);
         clearSuggestions();
       }
 

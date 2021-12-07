@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Details.css'
 import Details2 from './Details2';
 import Weights from './Weights';
@@ -7,16 +7,22 @@ import { Input } from '@material-ui/core';
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 Geocode.enableDebug();
 
-function Details({lat, lng, setLat, setLng, panTo, setSaddress, setCurrloc, flag, setFlag}) {
+function Details({lat, lng, setLat, setLng, panTo, setSaddress, setCurrloc, flag, setFlag, saddress}) {
 
-
+    // console.log(a,b)
     const [work, setWork] = useState('');
     const [work2, setWork2] = useState('');
     const [category, setCategory] = useState('');
     const [flag2, setFlag2] = useState(false);
     
+    // useEffect(() => {
+    //     setLat(a);
+    //     setLng(b);
+    // }, [])
 
+    console.log(lat, lng)
 
+    // console.log(lat)
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(work);
@@ -114,7 +120,7 @@ function Details({lat, lng, setLat, setLng, panTo, setSaddress, setCurrloc, flag
 
                 {/* {work ?  : null } */}
                 {/* <div className="service" id={work} onClick={(e) => handleClick(e, {work})} key="1" value={work}>{work}</div> */}
-                {work && <Details2 work={work} />}
+                {work && <Details2 work={work} saddress={saddress} />}
                 <div className="cover"></div>
             </form>
         </div>

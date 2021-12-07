@@ -107,9 +107,16 @@ function Home() {
                 <TextField variant="outlined" placeholder="Longitude" value={lng} onChange={handleLngChange}/>
                 
                 </div>
-                <Link to='/maps'>
-                <button className='drone p-2'>Search all Drones</button>
-                </Link>
+                <Link to={{
+                        pathname: '/maps',
+                        state: {
+                          lat:lat,
+                          lng:lng,
+                          saddress:saddress,
+                        }
+                      }}><button className='drone p-2'>Search all Drones</button></Link>
+                
+
                 </div>
                 {/* <img src="/man.jpg" /> */}
             </div>

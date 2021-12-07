@@ -19,6 +19,7 @@ import Details from './Details';
 import Geocode from "react-geocode";
 import {SearchIcon} from '@heroicons/react/solid'
 import Search from './Search';
+import { useLocation } from "react-router-dom"
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 Geocode.enableDebug();
@@ -75,12 +76,27 @@ lat: 20.5937,
 lng: 78.9629,
 };
 function Maps() {
+    
+    const location = useLocation();
+    // console.log(location.state);
+    // const {lat, lng, saddress} = location.state
+    
+    // const {description, title, images} = (location.state.question);
+    // const data=props;
+    // const { from } = location.state
+    // console.log(from);
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries,
         
     })
 
+    // const a=0;
+    // const b=0;
+    // location.state.lat ? a = location.state.lat :  a=0;
+    // location.state.lng ? b = location.state.lng :  b=0;
+    
+    
     const [markers, setMarkers] = useState([]);
     const [selected, setSelected] = useState(null);
     const [lat, setLat] = useState(0);
@@ -88,10 +104,14 @@ function Maps() {
     const [currloc, setCurrloc] = useState(false);
     const [saddress, setSaddress] = useState('');
     const [flag, setFlag] = useState(false);
+    // console.log(typeof(lat))
+    
+      
+      // setLng(b);
+    // console.log(lat)
+  
 
-    // useEffect(() => {
-    //   console.log(markers)
-    // }, []); // Only re-subscribe if props.friend.id changes
+    // console.log(b,lng)
 
     const onMapClick = useCallback((e) => {
 
@@ -161,10 +181,10 @@ function Maps() {
         
             
             <div className='first'>
-            <h1 className='fill'>Fill all the requirements</h1>
+            <h1 className='fill m-3'>Fill all the requirements</h1>
             <Current panTo={panTo} setCurrloc={setCurrloc} setSaddress={setSaddress} setFlag={setFlag} />
             <Search panTo={panTo} lat={lat} lng={lng} setLat={setLat} setLng={setLng} currloc={currloc} setCurrloc={setCurrloc} saddress={saddress} setFlag={setFlag}/>
-            <Details lat={lat} lng={lng} setLat={setLat} setLng={setLng} panTo={panTo} setSaddress={setSaddress} setCurrloc={setCurrloc} flag={flag} setFlag={setFlag} />
+            <Details  lat={lat} lng={lng} setLat={setLat} setLng={setLng} panTo={panTo} setSaddress={setSaddress} setCurrloc={setCurrloc} flag={flag} setFlag={setFlag} saddress={saddress} />
             
             </div>
             

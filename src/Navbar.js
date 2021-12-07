@@ -59,6 +59,10 @@ export default function Navbar() {
       <Link to='/maps'>
        <button className='drone'>Book Drone</button>
        </Link>
+
+       <Link to='/pilots'>
+       <button className='drone m-2 bg-info text-white'>Register Pilot</button>
+       </Link>
     </div>
     
   </div>

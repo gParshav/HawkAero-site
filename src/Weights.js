@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import './Weights.css'
+import axios from 'axios'
 
-function Weights({work}) {
+function Weights({work, type, saddress}) {
     const choices = {
         "Inspection" : ["Less than 2kg", "Less than 25kg", "Less than 150kg"],
         "Surveillance" : ["Less than 2kg", "Less than 25kg", "Less than 150kg"],
@@ -24,6 +25,25 @@ function Weights({work}) {
         setPrev(e.target.id);
         document.getElementById(e.target.id).classList.add("service_selected");
     }
+    const handleSubmit = async (e) => {
+        try{
+          console.log(1);
+          const res = await axios.post("/users/order", {
+            address:saddress,
+            type:work,
+            service:type,
+            category:weight,
+            time:duration
+          });
+          console.log(res);
+          
+        }catch(err){
+          console.log(err);
+        }
+        window.alert("Order Confirmed!");
+        // window.location.reload();
+    }
+
 
     return (
         <>
@@ -45,7 +65,7 @@ function Weights({work}) {
                                 className='fly_duration'
 
                                 />
-                        <button type="submit" className='finalSubmit' >SUBMIT</button>
+                        <button type="submit" onClick={handleSubmit} className='finalSubmit' >SUBMIT</button>
                         </div>
                    
             }
